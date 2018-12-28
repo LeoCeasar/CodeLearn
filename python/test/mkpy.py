@@ -4,6 +4,7 @@
 
 import sys
 import os
+import stat
 from optparse import *
 
 versionStr = '1.0.0.1';
@@ -26,9 +27,15 @@ if options.path:
 	if os.path.exists(options.path):
 		print("the file " + options.path + " is already exists")
 	else:
-		fo = open(options.path, "wx");
+		fo = open(options.path, "w");
 		fo.write(strTmp);
 		fo.close();
+
+		#赋予执行权限
+		#os.chmod(options.path, stat.S_IRWXU | stat.S_IXOTH | stat.S_IXGRP)
+		os.chmod(options.path, 0o755)
+		#这里如果不加0o的话默认是十进制，会进行转换为八进制，所以需要在前面加0o
+		#os.system('chmod 755 ' + options.path) #linux
 
 		if options.edit:
 			os.system('vim ' + options.path +' +4')#跳到指定行数
