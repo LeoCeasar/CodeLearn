@@ -34,25 +34,25 @@ descriptionStr = "which can reduce the time for edit a file of python and write 
 parser = OptionParser(hstr, description=descriptionStr, version=versionStr);
 
 parser.add_option('-m', '--make', action='store', dest='path', help='input your file name');
-parser.add_option('-e', '--edit', action='store_true', dest='edit', help='if you want to edit it, then add it.if you dont want to edit the file what you make you just want to make it,then do not add this option');
+parser.add_option('-n', '--noedit', action='store_true', dest='edit', help='if you dont want to edit it, then add it.');
 
 
 #options, args = parser.parse_args(sys.argv[1:0]);
 options, args = parser.parse_args();
 
 #如果后面不添加一个空格则无法在后面空出一行空白行
-strTmp = "#!/usr/bin/python3\r\n# _*_ coding: utf-8 _*_\r\n \r\n ";
+strTmp = "#!/usr/bin/python3\n# _*_ coding: utf-8 _*_\n \n ";
 
 if options.path:
 		if creFile(options.path, 0o755):
-			if options.edit:
+			if not options.edit:
 				os.system('vim ' + options.path +' +4');#跳到指定行数
 		else:
 			pass;
 else :
 	if len(args)==1:
 		if creFile(args[0], 0o755):
-			if options.edit:
+			if not options.edit:
 				os.system('vim ' + args[0] +' +4');#跳到指定行数
 			else:
 				pass;
