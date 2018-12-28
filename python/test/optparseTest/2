@@ -1,0 +1,69 @@
+#!/usr/bin/python
+# _*_ coding: utf-8 _*_
+import optparse
+import configparser
+ 
+from optparse import OptionParser
+
+config = configparser.ConfigParser()
+config.read("./config.ini")
+
+# 一个帮助文档解释字符串
+hstr = '%prog ' + config['system']['version'] + ' custom help string'
+parser = OptionParser(hstr, description='custom description', version='%prog '+config['system']['version'])
+#通过OptionParser类创建parser实例,初始参数usage中的%prog等同于os.path.basename(sys.argv[0]),即
+#你当前所运行的脚本的名字，version参数用来显示当前脚本的版本。
+'''
+添加参数，-f、--file是长短options，有一即可。
+dest='user' 将该用户输入的参数保存到变量user中，可以通过options.user方式来获取该值
+action用来表示将option后面的值如何处理，比如:
+XXX.py -f test.txt
+经过parser.parse_args()处理后,则将test.txt这个值存储进-f所代表的一个对象，即定义-f中的dest
+即option.filename = 'test.txt'
+action的常用选项还有store_true,store_false等，这两个通常在布尔值的选项中使用。
+ 
+ metavar仅在显示帮助中有用，如在显示帮助时会有：
+ -f FILE, --filename=FILE    write output to FILE
+ -m MODE, --mode=MODE  interaction mode: novice, intermediate, or expert
+                         [default: intermediate]
+如果-f这一项没有metavr参数，则在上面会显示为-f FILENAME --filename=FILENAME,即会显示dest的值
+ 
+ defalut是某一选项的默认值，当调用脚本时，参数没有指定值时，即采用default的默认值。
+ '''
+
+parser.add_option('-i', '--input', action='store', dest='input', help='read input data from input file')
+parser.add_option('-o', '--output', action='store', dest='output', help='write data to output file')
+parser.add_option('-q', '--quite', action='store_false', dest='version', help='don\'t print the version')
+# parser.add_option('-v', '--version', action='store_true', dest='version', default=False, help='print the version')
+# parser.add_option('-v', '--version', action='store_true', dest='version', help='print the version')
+ 
+parser.add_option('-f', '--file', action='store', dest='file', help='file to handle')
+parser.add_option('-a', '--add', action='append', dest='add', help='add to handle')
+parser.add_option('-c', '--count', action='count', dest='count', help='count to handle')
+parser.add_option('-d', '--count1', action='count', dest='count', help='count1 to handle')
+ 
+#parser.add_option('-v', '--version', dest='version')
+ 
+if parser.has_option('-f'):
+    print('content -f') # parser.set_default('-f', 'myFile')
+    parser.remove_option('-f')
+if not parser.has_option('-f'):
+    print('do not content -f')
+# 用一个数组模拟命令参数
+#testArgs = ['-i', 'someForInput', '-f', 'someForFile', '-vq', '-a', 'test1 test2 test3', '-c', '-d']
+testArgs = [ '-i', 'someForInput', 'someForFile', 'someForFile1', '-q', '-a', 'test1 test2 test3', '-c', '-d', '-h']
+options, args = parser.parse_args(testArgs)
+print('options : %s' % options)
+print('args : %s' % args)
+ 
+if options.input:
+    print('input in args : %s' % options.input)
+if options.version:
+    print('version 1.0.0')
+ 
+# if options.file:
+# print('file in args : %s' % options.file)
+if options.add:
+    print('add in args : %s' % options.add)
+ 
+print('version in args', options.version)

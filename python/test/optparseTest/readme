@@ -1,0 +1,45 @@
+类OptionParser
+class optparse.OptionParser(usage=None, 
+                 option_list=None,
+                 option_class=Option,
+                 version=None,
+                 conflict_handler="error",
+                 description=None,
+                 formatter=None,
+                 add_help_option=True,
+                 prog=None,
+                 epilog=None)
+                 
+
+参数：
+usage：程序的使用说明，其中"%prog"会替换为文件名（或者prog属性，若指定了prog属性值），"[options]"会替换为各个参数的使用说明
+version：版本号
+函数add_option()
+add_option(short, long, action, type, dest, default, help)
+
+参数：
+short option string: 为第一个参数，表示option的缩写，例如-f;
+long option string: 为第二个参数，表示option的全拼，例如--file;
+action=: 表示对此option的处理方式，默认值为store，表示存储option的值到解析后的options对象的成员中。
+
+action还可以有其他的值：对于bool值，使用store_true来默认存储true，使用store_false来默认存储false，store_const用来存储const设置的值到此option，append表示增加option的参数到list中，此时此option是一个list，可能包含多个值，count表示对counter增加一，callback表示调用指定的函数。所有的action值如下：
+store + store_true + store_false + store_const + append + count + callback
+
+type=:表示此option的值的类型，默认为string，可以指定为string, int, choice, float and complex；
+dest=：表示此option在经过optionparser解析后的options对象中成员的名字，默认使用long option string；
+help=:表示这个参数的使用说明;
+default=:表示比option的默认值；
+metavar=:表示显示到help中option的默认值；
+const=:当action为store_const的时候，需要设置此值；
+choices=:当设置type为choices时，需要设置此值；
+函数parse_args
+(options, args) = parser.parse_args()
+
+返回值：
+options为是一个directory,它的内容为“参数/值 ”的键值对。
+args是一个list，它的内容是所有参数除去options后，剩余的输入内容。
+
+作者：201609301129
+链接：https://www.jianshu.com/p/0361cd8b8fec
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
