@@ -1,0 +1,10 @@
+2019-01-04 13:52:26,981 - DEBUG - This is a debug log.
+2019-01-04 13:52:26,981 - INFO - This is a info log.
+2019-01-04 13:52:26,981 - WARNING - This is a warning log.
+2019-01-04 13:52:26,981 - ERROR - This is a error log.
+2019-01-04 13:52:26,981 - CRITICAL - This is a critical log.
+2019-01-04 13:52:26,981 - DEBUG - This is a debug log.
+2019-01-04 13:52:26,981 - INFO - This is a info log.
+2019-01-04 13:52:26,981 - WARNING - This is a warning log.
+2019-01-04 13:52:26,981 - ERROR - This is a error log.
+2019-01-04 13:52:26,981 - CRITICAL - This is a critical log.
