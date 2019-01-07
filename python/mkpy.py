@@ -7,9 +7,9 @@ import os
 import stat
 from optparse import *
 
-def creFile(path, mod):
+def creFile(path, mod, force):
 	bRet = False;
-	if os.path.exists(path):
+	if os.path.exists(path) and not force:
 		print("the file " + path + " is already exists")
 	else:
 		fo = open(path, "w");
@@ -34,6 +34,7 @@ descriptionStr = "which can reduce the time for edit a file of python and write 
 parser = OptionParser(hstr, description=descriptionStr, version=versionStr);
 
 parser.add_option('-m', '--make', action='store', dest='path', help='input your file name');
+parser.add_option('-f', '--force', action='store_true',default=True, dest='force', help='force to overwrite a existed file');
 parser.add_option('-n', '--noedit', action='store_true', dest='edit', help='if you dont want to edit it, then add it.');
 
 
@@ -44,14 +45,14 @@ options, args = parser.parse_args();
 strTmp = "#!/usr/bin/python3\n# _*_ coding: utf-8 _*_\n \n ";
 
 if options.path:
-		if creFile(options.path, 0o755):
+		if creFile(options.path, 0o755, options.force):
 			if not options.edit:
 				os.system('vim ' + options.path +' +4');#跳到指定行数
 		else:
 			pass;
 else :
 	if len(args)==1:
-		if creFile(args[0], 0o755):
+		if creFile(args[0], 0o755, options.force):
 			if not options.edit:
 				os.system('vim ' + args[0] +' +4');#跳到指定行数
 			else:
