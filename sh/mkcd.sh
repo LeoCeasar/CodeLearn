@@ -4,7 +4,8 @@
 if test -z "$1";
 then
     echo "error command"
-    exit 0
+    #exit 0
+    return
 fi
 mkdir $1
 cd $1

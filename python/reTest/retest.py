@@ -5,7 +5,8 @@ import re;
 
 line = "Cats are smarter than dogs";
 
-matchObj = re.match(r'(.*) are (.*?) .*', line, re.M | re.I);
+matchObj = re.match(r'(.*) are (\w+?\b)', line, re.M | re.I);
+#matchObj = re.match(r'(.*) are (.*?) .*', line, re.M | re.I);
 
 print (matchObj);
 
