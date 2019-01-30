@@ -1,0 +1,20 @@
+#!/usr/bin/python3
+# _*_ coding: utf-8 _*_
+ 
+import scrapy
+
+class CnblogsSpider(scrapy.Spider):
+    name = "cnBlogs";
+    allowed_domains = ["cnblogs.com"]
+    start_urls = [
+            "http://www.cnblogs.com/qiyeboy/default.html?page=1"
+            ]
+
+    def parse(self, response):
+        papers = response.xpath(".//*[@class='day']")
+
+        for paper in papers:
+            url = paper.xpath(".//*[@class='posTitle']/a/@href").extract()[0]
+            title = paper.xpath(".//*[@class='posTitle']/a/text()").extract()[0]
+            time = paper.xpath(".//*[@class='dayTitle']/a/text()").extract()[0]
+            contente = paper.xpath(".//*[@class='posTitle']/a/@text()").extract()[0]
