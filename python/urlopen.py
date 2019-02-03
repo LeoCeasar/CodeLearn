@@ -7,12 +7,20 @@ import ssl
 if sys.version_info[0] ==3:
     from urllib.request import urlopen,Request
 else:
-    from urllib import urlopen,Request
+    from urllib2 import urlopen,Request
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
 if len(sys.argv) > 1:
     url = sys.argv[1]
+
+    if sys.version_info[0] == 3:
+        from urllib.parse import urlparse
+    else:
+        from urllib import urlparse
+
+    if not urlparse(url).scheme:
+        url = 'http://' + url;
 else:
     url = "http://www.baidu.com"
 
