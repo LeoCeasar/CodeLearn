@@ -1,0 +1,17 @@
+过拟合或者欠拟合怎么修正 https://www.jianshu.com/p/75c1ef693b7e
+
+Dropout
+
+The dropout method is designed to prevent the network from learning to rely on specific weights.
+
+Dropout forces a neural network to learn more robust features that are useful in conjunction with many different random subsets of the other neurons.
+
+Dropout roughly doubles the number of iterations required to converge. However, training time for each epoch is less.
+
+With H hidden units, each of which can be dropped, we have 2^H possible models. In testing phase, the entire network is considered and each activation is reduced by a factor p.
+
+Large weights in a neural network are a sign of a more complex network that has overfit the training data.
+
+Probabilistically dropping out nodes in the network is a simple and effective regularization method.
+
+A large network with more training and the use of a weight constraint are suggested when using dropout.
