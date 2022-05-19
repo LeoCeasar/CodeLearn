@@ -25,6 +25,8 @@ aab
 
 # 题目解析
 
+找出长度小于k的所有子串，然后进行排序，输出第k-1个元素。
+
 # 总结
 
 [第k小子串-牛客](https://www.nowcoder.com/questionTerminal/c59d9690061e448fb8ec7d744c20ebff?f=discussion)
